@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require './player.rb'
-require './board.rb'
+require_relative './player.rb'
+require_relative './board.rb'
 
 # Overall game functionality
 class Game

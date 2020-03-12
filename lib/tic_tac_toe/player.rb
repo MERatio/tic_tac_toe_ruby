@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Represents the player
 class Player
   attr_reader :name, :option
 

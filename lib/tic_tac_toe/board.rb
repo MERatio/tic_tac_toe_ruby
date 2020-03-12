@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Represents the board that holds the squares
 class Board
   attr_accessor :squares
 
@@ -7,9 +10,9 @@ class Board
 
   def display_board
     puts "#{squares[0]} | #{squares[1]} | #{squares[2]}"
-    puts "--+---+--"
+    puts '--+---+--'
     puts "#{squares[3]} | #{squares[4]} | #{squares[5]}"
-    puts "--+---+--"
+    puts '--+---+--'
     puts "#{squares[6]} | #{squares[7]} | #{squares[8]}"
     puts "\n"
   end
