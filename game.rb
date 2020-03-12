@@ -1,17 +1,20 @@
+# frozen_string_literal: true
+
 require './player.rb'
 require './board.rb'
 
+# Overall game functionality
 class Game
   attr_accessor :board, :current_player, :round, :winner, :draw
 
   def initialize
-    @player1 = Player.new('Player 1', "X")
-    @player2 = Player.new('Player 2', "O")
+    @player1 = Player.new('Player 1', 'X')
+    @player2 = Player.new('Player 2', 'O')
     self.board = Board.new
     self.round = 1
     play
   end
- 
+
   private
 
   def play
@@ -28,17 +31,21 @@ class Game
   end
 
   def get_current_player
-    @round % 2 == 0 ? @player2 : @player1
+    @round.even? ? @player2 : @player1
   end
 
   def get_player_square
     square = nil
-    unless @board.squares.include?(square)
+    until valid_square?(square)
       puts "#{@current_player.name} (#{current_player.option}) type in 1 to 9"
       square = gets.chomp.to_i
       puts "\n"
     end
     square
+  end
+
+  def valid_square?(square)
+    (1..9).include?(square) && (1..9).include?(@board.squares[square - 1])
   end
 
   def input_square(square)
@@ -56,17 +63,17 @@ class Game
       [0, 4, 8],
       [2, 4, 6]
     ]
-    lines.each do |line| 
+    lines.each do |line|
       a, b, c = line
       if @board.squares[a] && @board.squares[a] == @board.squares[b] && @board.squares[a] == @board.squares[c]
         @winner = get_current_player
       end
     end
-    return nil
+    nil
   end
 
   def check_draw
-    round == 9 ? @draw = true : @draw = false 
+    @draw = round == 9
   end
 
   def display_game_result
@@ -74,7 +81,7 @@ class Game
     if @winner
       puts "#{@winner.name} (#{@winner.option}) wins the game!"
     elsif @draw
-      puts "Draw!"
+      puts 'Draw!'
     end
   end
 end
