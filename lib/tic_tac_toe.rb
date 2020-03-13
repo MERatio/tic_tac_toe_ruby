@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
 require_relative './tic_tac_toe/game.rb'
 
-Game.new
+game = Game.new
+game.play

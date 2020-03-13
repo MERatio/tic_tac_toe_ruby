@@ -12,10 +12,7 @@ class Game
     @player2 = Player.new('Player 2', 'O')
     self.board = Board.new
     self.round = 1
-    play
   end
-
-  private
 
   def play
     while !@winner & !@draw
@@ -29,6 +26,8 @@ class Game
     end
     display_game_result
   end
+
+  private
 
   def get_current_player
     @round.even? ? @player2 : @player1
@@ -66,10 +65,9 @@ class Game
     lines.each do |line|
       a, b, c = line
       if @board.squares[a] && @board.squares[a] == @board.squares[b] && @board.squares[a] == @board.squares[c]
-        @winner = get_current_player
+        @winner = @board.squares[a] == 'X' ? @player1 : @player2
       end
     end
-    nil
   end
 
   def check_draw
